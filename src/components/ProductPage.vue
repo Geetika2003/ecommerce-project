@@ -10,6 +10,9 @@
           <router-link to="/products" class="nav-link" exact-active-class="active">Products</router-link>
           <router-link to="/contact" class="nav-link">Contact Us</router-link>
         </div>
+        <button class="menu-toggle" @click="toggleMenu">
+          ☰
+        </button>
       </nav>
     </header>
 
@@ -66,11 +69,22 @@ export default {
       ],
     };
   },
+  methods: {
+    toggleMenu() {
+      this.isMenuOpen = !this.isMenuOpen;
+      const navLinks = document.querySelector(".nav-links");
+      if (this.isMenuOpen) {
+        navLinks.classList.add("responsive");
+      } else {
+        navLinks.classList.remove("responsive");
+      }
+    },
+  },
 };
 </script>
 
 <style scoped>
-/* Navbar styling */
+/* Navbar */
 .navbar {
   display: flex;
   justify-content: space-between;
@@ -78,6 +92,7 @@ export default {
   background-color: #333;
   padding: 15px;
   animation: fadeIn 1s ease-in-out;
+  position: relative;
 }
 
 .logo {
@@ -109,6 +124,52 @@ export default {
 .nav-link.active {
   border-bottom: 2px solid white;
 }
+
+/* Menu toggle button */
+.menu-toggle {
+  display: none;
+  background: none;
+  border: none;
+  font-size: 24px;
+  color: white;
+  cursor: pointer;
+  transition: transform 0.3s;
+}
+
+.menu-toggle:hover {
+  transform: rotate(90deg);
+}
+
+/* Responsive nav links for small screens */
+.nav-links.responsive {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  position: absolute;
+  top: 60px;
+  right: 20px;
+  background: #333;
+  padding: 10px;
+  border-radius: 5px;
+  width: 200px;
+  z-index: 10;
+}
+
+.nav-links.responsive .nav-link {
+  text-align: center;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .nav-links {
+    display: none; /* Hide links by default on smaller screens */
+  }
+
+  .menu-toggle {
+    display: block; /* Show the toggle button */
+  }
+}
+
 
 .product-container {
   display: flex;
