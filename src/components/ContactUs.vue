@@ -47,6 +47,12 @@ export default {
     },
     toggleMenu() {
       this.isMenuOpen = !this.isMenuOpen;
+      const navLinks = document.querySelector(".nav-links");
+      if (this.isMenuOpen) {
+        navLinks.classList.add("responsive");
+      } else {
+        navLinks.classList.remove("responsive");
+      }
     },
   },
 };
