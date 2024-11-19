@@ -51,9 +51,26 @@
 
 <script>
 export default {
-  name: "LandingPage"
-}
+  name: "LandingPage",
+  data() {
+    return {
+      isMenuOpen: false, // Track the menu state
+    };
+  },
+  methods: {
+    toggleMenu() {
+      this.isMenuOpen = !this.isMenuOpen;
+      const navLinks = document.querySelector(".nav-links");
+      if (this.isMenuOpen) {
+        navLinks.classList.add("responsive");
+      } else {
+        navLinks.classList.remove("responsive");
+      }
+    },
+  },
+};
 </script>
+
 
 <style scoped>
 /* Navbar */
@@ -64,6 +81,7 @@ export default {
   background-color: #333;
   padding: 15px;
   animation: fadeIn 1s ease-in-out;
+  position: relative;
 }
 
 .logo {
@@ -95,6 +113,8 @@ export default {
 .nav-link.active {
   border-bottom: 2px solid white;
 }
+
+/* Menu toggle button */
 .menu-toggle {
   display: none;
   background: none;
@@ -104,9 +124,12 @@ export default {
   cursor: pointer;
   transition: transform 0.3s;
 }
+
 .menu-toggle:hover {
   transform: rotate(90deg);
 }
+
+/* Responsive nav links for small screens */
 .nav-links.responsive {
   display: flex;
   flex-direction: column;
@@ -117,11 +140,25 @@ export default {
   background: #333;
   padding: 10px;
   border-radius: 5px;
+  width: 200px;
+  z-index: 10;
 }
 
 .nav-links.responsive .nav-link {
-  text-align: right;
+  text-align: center;
 }
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .nav-links {
+    display: none; /* Hide links by default on smaller screens */
+  }
+
+  .menu-toggle {
+    display: block; /* Show the toggle button */
+  }
+}
+
 /* Banner */
 .banner {
   background-image: url('https://www.homelane.com/blog/wp-content/uploads/2022/04/shutterstock_1198452376-1-1-scaled.jpg'); /* Replace with your image URL */
@@ -154,9 +191,6 @@ export default {
 .banner h1 {
   margin-top: 100px;
   font-size: 3rem;
-  white-space: nowrap;
-  overflow: hidden;
-  animation: typing 3s steps(40, end), blink 0.6s step-end infinite;
 }
 .banner p {
   font-size: 1.5rem;
