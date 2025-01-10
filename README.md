@@ -22,3 +22,6 @@ npm run lint
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
+
+### Deployed project link:
+https://ecommerce-project-eight-ashen.vercel.app/
